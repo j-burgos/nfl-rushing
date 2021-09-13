@@ -10,12 +10,12 @@
             </span>
           </p>
           <p class="control">
-            <a phx-click="export" class="button is-info">
+            <%= link to: Routes.player_path(@socket, :export, q: @query, sort: @sort), class: "button is-info" do %>
               <span class="icon">
                 <i class="fas fa-file-csv"></i>
               </span>
               <span>Export</span>
-            </a>
+            <% end %>
           </p>
         </div>
       </form>
