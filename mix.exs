@@ -43,7 +43,8 @@ defmodule NflRushing.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:nimble_csv, "~> 1.1"}
+      {:nimble_csv, "~> 1.1"},
+      {:scrivener_list, "~> 2.0"}
     ]
   end
 

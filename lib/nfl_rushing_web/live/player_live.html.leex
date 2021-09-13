@@ -109,7 +109,7 @@
           "20+" => twenty_plus,
           "40+" => forty_plus,
           "FUM" => fum,
-          } <- @results do %>
+          } <- @results.entries do %>
           <tr>
             <td><%= player %></td>
             <td><%= team %></td>
@@ -130,6 +130,58 @@
         <% end %>
         </tbody>
       </table>
+
+      <%# Pagination %>
+      <nav class="pagination is-centered is-rounded" role="navigation">
+        <%= if @results.page_number - 1 > 0 do %>
+          <a phx-click="paginate" phx-value-page="<%= @results.page_number - 1 %>" class="pagination-previous">Previous</a>
+        <% else %>
+          <a disabled class="pagination-previous" >Previous</a>
+        <% end %>
+
+        <%= if @results.page_number + 1 <= @results.total_pages do %>
+          <a phx-click="paginate" phx-value-page="<%= @results.page_number + 1 %>" class="pagination-next">Next page</a>
+        <% else %>
+          <a disabled class="pagination-next">Next page</a>
+        <% end %>
+
+        <ul class="pagination-list">
+          <%# First page %>
+          <%= if @results.page_number - 2 > 0 do %>
+          <li><a phx-click="paginate" phx-value-page="1" class="pagination-link">1</a></li>
+          <li><span class="pagination-ellipsis">&hellip;</span></li>
+          <% end %>
+
+          <%# Prev page %>
+          <%= if @results.page_number - 1 > 0 do %>
+          <li>
+            <a phx-click="paginate" phx-value-page="<%= @results.page_number - 1 %>" class="pagination-link"><%= @results.page_number - 1 %></a>
+          </li>
+          <% end %>
+
+          <%# Current page %>
+          <li>
+            <a class="pagination-link is-current">
+            <%= @results.page_number %>
+            </a>
+          </li>
+
+          <%# Next page %>
+          <%= if @results.page_number + 1 <= @results.total_pages do %>
+          <li>
+            <a phx-click="paginate" phx-value-page="<%= @results.page_number + 1 %>" class="pagination-link"><%= @results.page_number + 1 %></a>
+          </li>
+          <% end %>
+
+          <%# Last page %>
+          <%= if @results.page_number + 2 <= @results.total_pages do %>
+          <li><span class="pagination-ellipsis">&hellip;</span></li>
+          <li>
+            <a phx-click="paginate" phx-value-page="<%= @results.total_pages %>" class="pagination-link"><%= @results.total_pages %></a>
+          </li>
+          <% end %>
+        </ul>
+      </nav>
     </div>
   </div>
 </section>
