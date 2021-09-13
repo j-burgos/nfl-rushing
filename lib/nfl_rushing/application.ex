@@ -15,7 +15,8 @@ defmodule NflRushing.Application do
       NflRushingWeb.Endpoint,
       # Start a worker by calling: NflRushing.Worker.start_link(arg)
       # {NflRushing.Worker, arg}
-      {NflRushing.Cache, refresh_after_seconds: 3600} #Update cache every hour
+      # Update cache every hour
+      {NflRushing.Cache, refresh_after_seconds: 3600}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
