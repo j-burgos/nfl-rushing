@@ -23,7 +23,7 @@ defmodule NflRushingWeb.PlayerLive do
     new_results =
       Datasource.all_players()
       |> Query.search(query, sort)
-      |> Scrivener.paginate(page: results.page_number, page_size: results.page_size)
+      |> Scrivener.paginate(page: 1, page_size: results.page_size)
 
     {:noreply, assign(socket, query: query, sort: sort, results: new_results)}
   end
