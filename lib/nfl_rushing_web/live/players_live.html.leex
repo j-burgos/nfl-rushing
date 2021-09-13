@@ -1,0 +1,92 @@
+<section class="section">
+  <div class="container">
+    <div class="block">
+      <form phx-change="search">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input phx-debounce="500" class="input is-info is-rounded" type="text" name="q" value="<%= @query %>" placeholder="Search by name" list="results" autocomplete="off"/>
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+        <%# <button type="submit" phx-disable-with="Searching...">Search</button> %>
+      </form>
+    </div>
+    <div class="block">
+      <table id="results" class="table is-striped is-fullwidth">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th>Pos</th>
+            <th>Att/G</th>
+            <th>Att</th>
+            <th>
+              Yds
+              <span phx-click="sort" phx-value-by="Yds" class="icon">
+                  <i class="fas fa-sort"></i>
+              </span>
+            </th>
+            <th>Avg</th>
+            <th>Yds/G</th>
+            <th>
+              TD
+              <span phx-click="sort" phx-value-by="TD" class="icon" >
+                  <i class="fas fa-sort"></i>
+              </span>
+            </th>
+            <th>
+              Lng
+              <span phx-click="sort" phx-value-by="Lng" class="icon">
+                  <i class="fas fa-sort"></i>
+              </span>
+            </th>
+            <th>1st</th>
+            <th>1st%</th>
+            <th>20+</th>
+            <th>40+</th>
+            <th>FUM</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= for %{
+          "Player" => player,
+          "Team" => team,
+          "Pos" => pos,
+          "Att/G" => att_g,
+          "Att" => att,
+          "Yds" => yds,
+          "Avg" => avg,
+          "Yds/G" => yds_g,
+          "TD" => td,
+          "Lng" => lng,
+          "1st" => fst,
+          "1st%" => fst_pct,
+          "20+" => twenty_plus,
+          "40+" => forty_plus,
+          "FUM" => fum,
+          } <- @results do %>
+          <tr>
+            <td><%= player %></td>
+            <td><%= team %></td>
+            <td><%= pos %></td>
+            <td><%= att_g %></td>
+            <td><%= att %></td>
+            <td><%= yds %></td>
+            <td><%= avg %></td>
+            <td><%= yds_g %></td>
+            <td><%= td %></td>
+            <td><%= lng %></td>
+            <td><%= fst %></td>
+            <td><%= fst_pct %></td>
+            <td><%= twenty_plus %></td>
+            <td><%= forty_plus %></td>
+            <td><%= fum %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
