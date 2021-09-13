@@ -14,13 +14,13 @@ defmodule NflRushingWeb.PlayerLive do
 
   @impl true
   def handle_event("search", %{"q" => query}, %{assigns: %{sort: sort}} = socket) do
-    results = Datasource.all_players |> Query.search(query, sort)
+    results = Datasource.all_players() |> Query.search(query, sort)
     {:noreply, assign(socket, query: query, sort: sort, results: results)}
   end
 
   @impl true
   def handle_event("sort", sort, %{assigns: %{query: query}} = socket) do
-    results = Datasource.all_players |> Query.search(query, sort)
+    results = Datasource.all_players() |> Query.search(query, sort)
     {:noreply, assign(socket, results: results, query: query, sort: sort)}
   end
 end

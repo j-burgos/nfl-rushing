@@ -10,7 +10,7 @@
             </span>
           </p>
           <p class="control">
-            <%= link to: Routes.player_path(@socket, :export, q: @query, sort: @sort), class: "button is-info" do %>
+            <%= link to: Routes.player_path(@socket, :export, q: @query, sort: @sort), class: "button is-info", target: "_blank" do %>
               <span class="icon">
                 <i class="fas fa-file-csv"></i>
               </span>

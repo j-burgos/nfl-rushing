@@ -34,6 +34,24 @@ defmodule NflRushingWeb.PlayerController do
       [@headers | results]
       |> NimbleCSV.RFC4180.dump_to_iodata()
 
-    send_download(conn, {:binary, content}, filename: "players.csv", content_type: "text/csv")
+    filename = generate_filename(query, sort)
+
+    send_download(conn, {:binary, content}, filename: filename, content_type: "text/csv")
+  end
+
+  defp generate_filename(query, sort) do
+    with_query =
+      case query do
+        "" -> ""
+        _ -> "_with_player_name_#{query}"
+      end
+
+    with_sort =
+      case sort do
+        %{"by" => ""} -> ""
+        %{"by" => sort_by, "order" => order} -> "_sorted_by_#{sort_by}_#{order}"
+      end
+
+    "players#{with_query}#{with_sort}.csv"
   end
 end
