@@ -12,9 +12,10 @@ defmodule NflRushing.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: NflRushing.PubSub},
       # Start the Endpoint (http/https)
-      NflRushingWeb.Endpoint
+      NflRushingWeb.Endpoint,
       # Start a worker by calling: NflRushing.Worker.start_link(arg)
       # {NflRushing.Worker, arg}
+      {NflRushing.Cache, refresh_after_seconds: 3600} #Update cache every hour
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
