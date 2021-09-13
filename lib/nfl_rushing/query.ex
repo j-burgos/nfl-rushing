@@ -18,9 +18,13 @@ defmodule NflRushing.Query do
   defp parse_value(v) when is_integer(v), do: v
 
   defp parse_value(v) when is_binary(v) do
-    {value, _} = v |> String.replace(",", "") |> Integer.parse()
+    {value, t} = v |> String.replace(",", "") |> Integer.parse()
 
-    value
+    case t do
+      # Longest Rush with a touchdown has more value
+      "T" -> value + 0.1
+      _ -> value
+    end
   end
 
   defp parse_order("asc"), do: :asc
