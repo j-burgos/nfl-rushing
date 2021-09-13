@@ -2,15 +2,22 @@
   <div class="container">
     <div class="block">
       <form phx-change="search">
-        <div class="field">
-          <p class="control has-icons-left">
-            <input phx-debounce="500" class="input is-info is-rounded" type="text" name="q" value="<%= @query %>" placeholder="Search by name" list="results" autocomplete="off"/>
+        <div class="field is-grouped">
+          <p class="control is-expanded has-icons-left">
+            <input phx-debounce="500" class="input is-info is-rounded" type="text" name="q" value="<%= @query %>" placeholder="Search by player name" autocomplete="off"/>
             <span class="icon is-small is-left">
               <i class="fas fa-search"></i>
             </span>
           </p>
+          <p class="control">
+            <a phx-click="export" class="button is-info">
+              <span class="icon">
+                <i class="fas fa-file-csv"></i>
+              </span>
+              <span>Export</span>
+            </a>
+          </p>
         </div>
-        <%# <button type="submit" phx-disable-with="Searching...">Search</button> %>
       </form>
     </div>
     <div class="block">
@@ -24,23 +31,59 @@
             <th>Att</th>
             <th>
               Yds
-              <span phx-click="sort" phx-value-by="Yds" class="icon">
-                  <i class="fas fa-sort"></i>
-              </span>
+              <%= if @sort["by"] !== "Yds" do %>
+              <a phx-click="sort" phx-value-by="Yds" phx-value-order="asc" class="icon">
+                <i class="fas fa-sort"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "Yds" and @sort["order"] == "asc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="Yds" phx-value-order="desc">
+                <i class="fas fa-sort-numeric-down"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "Yds" and @sort["order"] == "desc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="Yds" phx-value-order="asc">
+                <i class="fas fa-sort-numeric-up"></i>
+              </a>
+              <% end %>
             </th>
             <th>Avg</th>
             <th>Yds/G</th>
             <th>
               TD
-              <span phx-click="sort" phx-value-by="TD" class="icon" >
-                  <i class="fas fa-sort"></i>
-              </span>
+              <%= if @sort["by"] !== "TD" do %>
+              <a phx-click="sort" phx-value-by="TD" phx-value-order="asc" class="icon">
+                <i class="fas fa-sort"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "TD" and @sort["order"] == "asc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="TD" phx-value-order="desc">
+                <i class="fas fa-sort-numeric-down"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "TD" and @sort["order"] == "desc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="TD" phx-value-order="asc">
+                <i class="fas fa-sort-numeric-up"></i>
+              </a>
+              <% end %>
             </th>
             <th>
               Lng
-              <span phx-click="sort" phx-value-by="Lng" class="icon">
-                  <i class="fas fa-sort"></i>
-              </span>
+              <%= if @sort["by"] !== "Lng" do %>
+              <a phx-click="sort" phx-value-by="Lng" phx-value-order="asc" class="icon">
+                <i class="fas fa-sort"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "Lng" and @sort["order"] == "asc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="Lng" phx-value-order="desc">
+                <i class="fas fa-sort-numeric-down"></i>
+              </a>
+              <% end %>
+              <%= if @sort["by"] == "Lng" and @sort["order"] == "desc" do %>
+              <a class="icon" phx-click="sort" phx-value-by="Lng" phx-value-order="asc">
+                <i class="fas fa-sort-numeric-up"></i>
+              </a>
+              <% end %>
             </th>
             <th>1st</th>
             <th>1st%</th>
